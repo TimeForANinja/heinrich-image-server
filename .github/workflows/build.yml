@@ -31,13 +31,8 @@ jobs:
         cp -r images deploy/
         cp -r static deploy/
 
-    - name: Zip files
-      run: |
-        cd deploy
-        zip -r myapp.zip .
-
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: myapp
-        path: deploy/myapp.zip
+        path: deploy/
