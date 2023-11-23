@@ -1,0 +1,43 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.20
+
+    - name: Install dependencies
+      run: go mod download
+
+    - name: Build Windows executable
+      run: GOOS=windows GOARCH=amd64 go build -o myapp.exe
+
+    - name: Copy necessary files
+      run: |
+        mkdir deploy
+        cp myapp.exe deploy/
+        cp -r images deploy/
+        cp -r static deploy/
+
+    - name: Zip files
+      run: |
+        cd deploy
+        zip -r myapp.zip .
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: myapp
+        path: deploy/myapp.zip
