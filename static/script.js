@@ -48,30 +48,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 mainBox.appendChild(subBox);
             });
         });
-
-    // Show detail view when an image is clicked
-    function showDetailView(imageUrl) {
-        const image = document.createElement('img');
-        image.src = imageUrl;
-        detailView.innerHTML = '';
-        detailView.appendChild(image);
-        detailView.style.display = 'flex';
-        detailView.addEventListener('click', hideDetailView);
-    }
-
-    // Hide detail view when clicked outside the image
-    function hideDetailView() {
-        detailView.style.display = 'none';
-        detailView.removeEventListener('click', hideDetailView);
-    }
-
-    // Update layout when the window is resized
-    window.addEventListener('resize', updateLayout);
-
-    function updateLayout() {
-        // Reset the main box's display property
-        mainBox.style.display = 'none';
-        mainBox.offsetHeight; // Trigger a reflow
-        mainBox.style.display = 'flex';
-    }
 });
+
+// Show detail view when an image is clicked
+function showDetailView(imageUrl) {
+    const image = document.createElement('img');
+    image.src = imageUrl;
+    detailView.innerHTML = '';
+    detailView.appendChild(image);
+    detailView.style.display = 'flex';
+    detailView.addEventListener('click', hideDetailView);
+}
+
+// Hide detail view when clicked outside the image
+function hideDetailView() {
+    detailView.style.display = 'none';
+    detailView.removeEventListener('click', hideDetailView);
+}
+
+// Update layout when the window is resized
+window.addEventListener('resize', updateLayout);
+
+function updateLayout() {
+    // Reset the main box's display property
+    mainBox.style.display = 'none';
+    mainBox.offsetHeight; // Trigger a reflow
+    mainBox.style.display = 'flex';
+}
